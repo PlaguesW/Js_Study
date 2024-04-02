@@ -3,9 +3,26 @@ import morgan from 'morgan';
 
 const app = express();
 
+//* logs info about request
 app.use(morgan('tiny'));
-
+//* converts JSON to JS Object in POST, PUT, PATH requests
 app.use(express.json());
+//* converts form data to JS Object in POST, PUT, PATH requests
+app.use(express.urlencoded({ extended: true }));
+
+// app.use((req, res, next) => {
+//     if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+//         let data = '';
+//         req.on('data', (chunk) => (data += chunk.toString()));
+//         req.on('end', () => {
+//             const parsedFormData = qs.parse(data);
+//             req.body = parsedFormData;
+//             next();
+//         });
+//     } else {
+//         next();
+//     }
+// });
 
 // app.use((req, res, next) => {
 //     let data = '';
